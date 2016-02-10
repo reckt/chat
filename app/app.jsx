@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import chatApp from './redux/reducers';
+
+let store = createStore(chatApp);
 
 class Chat extends React.Component {
     render() {
@@ -9,4 +14,7 @@ class Chat extends React.Component {
     }
 }
 
-ReactDOM.render(<Chat />, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}>
+                    <Chat />
+                </Provider>,
+                document.getElementById('app'));
