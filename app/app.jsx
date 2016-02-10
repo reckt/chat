@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import chatApp from './redux/reducers';
 
 let store = createStore(chatApp);
@@ -9,12 +9,18 @@ let store = createStore(chatApp);
 class Chat extends React.Component {
     render() {
         return (
-            <h1>Hello World!</h1>
+            <h1>{this.props.username}</h1>
         );
     }
 }
 
+let App = connect(
+              state => ({
+                  username: state.username
+              })
+)(Chat);
+
 ReactDOM.render(<Provider store={store}>
-                    <Chat />
+                    <App />
                 </Provider>,
                 document.getElementById('app'));
