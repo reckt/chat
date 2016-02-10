@@ -32,18 +32,6 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['es2015', 'stage-0', 'react']
                 }
-            },
-            {
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader?name=assets/bin/fonts/[name].[ext]&limit=10000&minetype=application/font-woff"
-            },
-            {
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader?name=assets/bin/images/[name].[ext]"
-            },
-            {
-                test: /\.css$/,
-                loader: "style-loader!css-loader?name=assets/bin/css/[name].[ext]"
             }
         ]
     },
