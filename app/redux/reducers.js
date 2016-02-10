@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { SIGNIN } from './actions';
 
-function signin(state, action) {
+function signin(state = '', action) {
     switch (action.type) {
         case SIGNIN:
         return action.username;
