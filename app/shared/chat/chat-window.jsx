@@ -3,7 +3,7 @@ import Message from './chat-message';
 
 export default class ChatWindow extends React.Component {
     static propTypes = {
-        messages: React.PropType.array.isRequired
+        messages: React.PropTypes.array.isRequired
     };
     render() {
         return (
