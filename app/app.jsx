@@ -26,7 +26,7 @@ class Chat extends React.Component {
                 {this.props.username ?
                     <div>
                         <h1>Hello, {this.props.username}</h1>
-                        <ChatWindow messages={this.props.messages} />
+                        <ChatWindow messages={this.props.messages} username={this.props.username} />
                         <ChatInput placeholder="what would you like to say?" submit={this.say.bind(this)} />
                     </div>
                         :
