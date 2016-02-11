@@ -8,8 +8,8 @@ export default class ChatWindow extends React.Component {
     render() {
         return (
             <ul>
-                {this.props.messages.map(message => (
-                    <li><Message message={message} /></li>
+                {this.props.messages.map(({ message, username }) => (
+                    <li><Message message={message} username={username} /></li>
                     ))}
             </ul>
         );
