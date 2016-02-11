@@ -3,7 +3,8 @@ import Message from './chat-message';
 
 export default class ChatWindow extends React.Component {
     static propTypes = {
-        messages: React.PropTypes.array.isRequired
+        messages: React.PropTypes.array.isRequired,
+        username: React.PropTypes.string.isRequired
     };
     render() {
         return (
@@ -12,7 +13,7 @@ export default class ChatWindow extends React.Component {
                     <li style={{
                         listStyle: "none"
                     }}>
-                        <Message message={message} username={username} />
+                        <Message me={this.props.username === username} message={message} username={username} />
                     </li>
                 ))}
             </ul>
