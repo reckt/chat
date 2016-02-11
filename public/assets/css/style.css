@@ -4,6 +4,7 @@ h1 {
 
 body {
     margin: 40px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .chat-input {
@@ -21,6 +22,7 @@ body {
 }
 
 .bubble {
+    display: flex;
     position: relative;
     width: 250px;
     height: 100px;
@@ -28,15 +30,14 @@ body {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .bubble:after {
     content: "";
     position: absolute;
     top: 35px;
-    left: -15px;
     border-style: solid;
-    border-width: 15px 15px 15px 0;
     display: block;
     width: 0;
     z-index: 1;
@@ -44,18 +45,24 @@ body {
 
 .me {
     background: #337ab7;
-    right: -15px;
 }
 
 .me:after {
+    right: -15px;
     border-color: transparent #337ab7;
+    border-width: 15px 0 15px 15px;
 }
 
 .other {
     background: #5cb85c;
-    left: -15px;
 }
 
 .other:after {
+    left: -15px;
     border-color: transparent #5cb85c;
+    border-width: 15px 15px 15px 0;
+}
+
+.chat-text {
+    margin: 20px 40px 20px 40px;
 }
