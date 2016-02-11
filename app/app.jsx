@@ -11,10 +11,23 @@ const client = require('socket.io-client')('http://localhost:8080');
 let store = createStore(chatApp);
 
 class Chat extends React.Component {
+    componentWillMount() {
+        client.on('login', data => {
+            this.props.dispatch(addMessage({ message: "Welcome to the chat!" }));
+        });
+        client.on('new message', data => {
+            this.props.dispatch(addMessage(data));
+        });
+        client.on('user joined', ({ username }) => {
+            this.props.dispatch(addMessage({ message: username + " joined the chat!" }));
+        });
+        client.on('user left', ({ username }) => {
+            this.props.dispatch(addMessage({ message: username + " left the chat!" }));
+        });
+    }
     login(username) {
         this.props.dispatch(signin(username));
         client.emit('add user', username);
-        this.props.dispatch(addMessage({ message: "Welcome to the chat!" }));
     }
     say(message) {
         this.props.dispatch(addMessage({ username: this.props.username, message }));
