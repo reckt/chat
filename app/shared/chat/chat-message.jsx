@@ -9,7 +9,7 @@ export default class Message extends React.Component {
     render() {
         return (
             <div className={this.props.me ? "bubble me" : "bubble other"}>
-                {this.props.username ? this.props.username + ": " : ""}{this.props.message}
+                <p className="chat-text">{this.props.username ? this.props.username + ": " : ""}{this.props.message}</p>
             </div>
         );
     }
