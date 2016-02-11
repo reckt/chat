@@ -7,7 +7,7 @@ export default class ChatInput extends React.Component {
     };
     change(event) {
         if (event.key === 'Enter') {
-            this.props.signin(event.target.value);
+            this.props.submit(event.target.value);
         }
     }
     render() {
