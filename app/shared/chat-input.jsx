@@ -13,7 +13,7 @@ export default class ChatInput extends React.Component {
     }
     render() {
         return (
-            <input type="text" placeholder={this.props.placeholder} onKeyPress={this.change.bind(this)} />
+            <input type="text" className="chat-input" placeholder={this.props.placeholder} onKeyPress={this.change.bind(this)} />
         )
     }
 }
