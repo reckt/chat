@@ -14,6 +14,7 @@ class Chat extends React.Component {
     login(username) {
         this.props.dispatch(signin(username));
         client.emit('add user', username);
+        this.props.dispatch(addMessage({ message: "Welcome to the chat!" }));
     }
     say(message) {
         this.props.dispatch(addMessage({ username: this.props.username, message }));
