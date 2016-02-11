@@ -3,26 +3,49 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import chatApp from './redux/reducers';
-import { signin } from './redux/actions';
-import LoginInput from './shared/login-input';
+import { signin, addMessage } from './redux/actions';
+import ChatInput from './shared/chat-input';
+import ChatWindow from './shared/chat/chat-window';
 
 const client = require('socket.io-client')('http://localhost:8080');
 let store = createStore(chatApp);
 
 class Chat extends React.Component {
+    componentWillMount() {
+        client.on('login', data => {
+            this.props.dispatch(addMessage({ message: "Welcome to the chat!" }));
+        });
+        client.on('new message', data => {
+            this.props.dispatch(addMessage(data));
+        });
+        client.on('user joined', ({ username }) => {
+            this.props.dispatch(addMessage({ message: username + " joined the chat!" }));
+        });
+        client.on('user left', ({ username }) => {
+            this.props.dispatch(addMessage({ message: username + " left the chat!" }));
+        });
+    }
     login(username) {
         this.props.dispatch(signin(username));
         client.emit('add user', username);
+    }
+    say(message) {
+        this.props.dispatch(addMessage({ username: this.props.username, message }));
+        client.emit('new message', message);
     }
     render() {
         return (
             <div>
                 {this.props.username ?
-                    <h1>Hello, {this.props.username}</h1>
+                    <div>
+                        <h1>Hello, {this.props.username}</h1>
+                        <ChatWindow messages={this.props.messages} username={this.props.username} />
+                        <ChatInput placeholder="what would you like to say?" submit={this.say.bind(this)} />
+                    </div>
                         :
                     <div>
                         <h1>Choose a Username</h1>
-                        <LoginInput signin={this.login.bind(this)} />
+                        <ChatInput placeholder="username" submit={this.login.bind(this)} />
                     </div>
                 }
             </div>
@@ -32,7 +55,8 @@ class Chat extends React.Component {
 
 let App = connect(
               state => ({
-                  username: state.username
+                  username: state.username,
+                  messages: state.messages
               })
 )(Chat);
 
