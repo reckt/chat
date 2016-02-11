@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import chatApp from './redux/reducers';
-import { signin } from './redux/actions';
+import { signin, addMessage } from './redux/actions';
 import ChatInput from './shared/chat-input';
 import ChatWindow from './shared/chat/chat-window';
 
@@ -16,6 +16,8 @@ class Chat extends React.Component {
         client.emit('add user', username);
     }
     say(message) {
+        this.props.dispatch(addMessage(message));
+        client.emit('new message', message);
     }
     render() {
         return (
@@ -23,7 +25,7 @@ class Chat extends React.Component {
                 {this.props.username ?
                     <div>
                         <h1>Hello, {this.props.username}</h1>
-                        <ChatWindow messages={['hi', 'kaki']} />
+                        <ChatWindow messages={this.props.messages} />
                         <ChatInput placeholder="what would you like to say?" submit={this.say.bind(this)} />
                     </div>
                         :
