@@ -8,7 +8,10 @@ export default class ChatWindow extends React.Component {
     };
     render() {
         return (
-            <ul>
+            <ul style={{
+                height: "400px",
+                overflow: "scroll"
+            }}>
                 {this.props.messages.map(({ message, username }) => (
                     <li style={{
                         listStyle: "none"
