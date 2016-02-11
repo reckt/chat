@@ -8,6 +8,7 @@ export default class ChatInput extends React.Component {
     change(event) {
         if (event.key === 'Enter') {
             this.props.submit(event.target.value);
+            event.target.value = "";
         }
     }
     render() {
