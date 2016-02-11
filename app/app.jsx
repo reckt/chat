@@ -4,7 +4,8 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import chatApp from './redux/reducers';
 import { signin } from './redux/actions';
-import LoginInput from './shared/login-input';
+import ChatInput from './shared/chat-input';
+import ChatWindow from './shared/chat/chat-window';
 
 const client = require('socket.io-client')('http://localhost:8080');
 let store = createStore(chatApp);
@@ -14,15 +15,21 @@ class Chat extends React.Component {
         this.props.dispatch(signin(username));
         client.emit('add user', username);
     }
+    say(message) {
+    }
     render() {
         return (
             <div>
                 {this.props.username ?
-                    <h1>Hello, {this.props.username}</h1>
+                    <div>
+                        <h1>Hello, {this.props.username}</h1>
+                        <ChatWindow messages={['hi', 'kaki']} />
+                        <ChatInput placeholder="what would you like to say?" submit={this.say.bind(this)} />
+                    </div>
                         :
                     <div>
                         <h1>Choose a Username</h1>
-                        <LoginInput signin={this.login.bind(this)} />
+                        <ChatInput placeholder="username" submit={this.login.bind(this)} />
                     </div>
                 }
             </div>
@@ -32,7 +39,8 @@ class Chat extends React.Component {
 
 let App = connect(
               state => ({
-                  username: state.username
+                  username: state.username,
+                  messages: state.messages
               })
 )(Chat);
 
