@@ -1,17 +1,18 @@
 import React from 'react';
 
-export default class LoginInput extends React.Component {
+export default class ChatInput extends React.Component {
     static propTypes = {
-        signin: React.PropTypes.func.isRequired
+        submit: React.PropTypes.func.isRequired,
+        placeholder: React.PropTypes.string
     };
-    register(event) {
+    change(event) {
         if (event.key === 'Enter') {
             this.props.signin(event.target.value);
         }
     }
     render() {
         return (
-            <input type="text" placeholder="username" onKeyPress={this.register.bind(this)} />
+            <input type="text" placeholder={this.props.placeholder} onKeyPress={this.change.bind(this)} />
         )
     }
 }
