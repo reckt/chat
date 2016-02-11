@@ -35,7 +35,7 @@ body {
 .bubble:after {
     content: "";
     position: absolute;
-    top: 15px;
+    top: 11px;
     border-style: solid;
     display: block;
     width: 0;
