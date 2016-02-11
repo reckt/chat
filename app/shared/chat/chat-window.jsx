@@ -9,8 +9,12 @@ export default class ChatWindow extends React.Component {
         return (
             <ul>
                 {this.props.messages.map(({ message, username }) => (
-                    <li><Message message={message} username={username} /></li>
-                    ))}
+                    <li style={{
+                        listStyle: "none"
+                    }}>
+                        <Message message={message} username={username} />
+                    </li>
+                ))}
             </ul>
         );
     }
