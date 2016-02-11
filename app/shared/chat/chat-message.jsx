@@ -8,8 +8,18 @@ export default class Message extends React.Component {
     };
     render() {
         return (
-            <div className={this.props.me ? "bubble me" : "bubble other"}>
-                <p className="chat-text">{this.props.username ? this.props.username + ": " : ""}{this.props.message}</p>
+            <div style={{
+                display: "flex"
+            }}>
+                { this.props.me ? <p style={{
+                    marginRight: "20px"
+                }}>{this.props.username}</p> : undefined }
+                <div className={this.props.me ? "bubble me" : "bubble other"}>
+                    <p className="chat-text">{this.props.message}</p>
+                </div>
+                { !this.props.me ? <p style={{
+                    marginLeft: "20px"
+                }}>{this.props.username}</p> : undefined }
             </div>
         );
     }
