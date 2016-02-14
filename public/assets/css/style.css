@@ -8,6 +8,7 @@ body {
 }
 
 .chat-input {
+    width: 350px;
     background-color: #fff;
     border: 1px solid #ccc;
     overflow: hidden;
